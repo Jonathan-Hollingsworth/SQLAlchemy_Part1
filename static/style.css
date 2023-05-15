@@ -1,0 +1,26 @@
+img {
+    width: 100px;
+    height: 100px;
+}
+
+button {
+    color: white;
+    text-decoration: none;
+}
+.delete {
+    background-color: crimson;
+}
+
+.save {
+    background-color: limegreen;
+}
+
+.add {
+    background-color: gray;
+}
+
+.cancel {
+    color: darkgoldenrod;
+    border: 5px, solid, darkgoldenrod;
+    background-color: white;
+}
