@@ -24,7 +24,7 @@ class User(db.Model):
     
     image_url = db.Column(db.String(50),
                           nullable=False,
-                          default='https://tinyurl.com/default-pfp')
+                          default="https://tinyurl.com/default-pfp")
 
     def get_full_name(self):
         """Combines first name and last name into a single string and returns it"""

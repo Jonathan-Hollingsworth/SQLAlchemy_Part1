@@ -15,6 +15,10 @@ button {
     background-color: limegreen;
 }
 
+.edit {
+    background-color: darkslateblue;
+}
+
 .add {
     background-color: gray;
 }
