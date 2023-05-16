@@ -7,7 +7,7 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
-class Users(db.Model):
+class User(db.Model):
     "Information for each user"
 
     __tablename__ = "users"

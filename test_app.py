@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from app import app
-from models import db, Users
+from models import db, User
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
@@ -16,14 +16,14 @@ class BloglyTestCase(TestCase):
     def setUp(self):
         """Clear the table before every test"""
 
-        Users.query.delete()
-        user = Users(first_name='John', last_name='Smith', image_url='https://tinyurl.com/default-pfp')
+        User.query.delete()
+        user = User(first_name='John', last_name='Smith', image_url='https://tinyurl.com/default-pfp')
         db.session.add(user)
         db.session.commit()
         self.user_id = user.id
 
     def tearDown(self):
-        """Clean up any faild transactions"""
+        """Clean up any failed transactions"""
 
         db.session.rollback()
 

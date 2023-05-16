@@ -2,7 +2,7 @@
 
 from flask import Flask, redirect, request, render_template
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, Users
+from models import db, connect_db, User
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -24,14 +24,14 @@ def homepage():
 def list_users():
     """Lists all users that currently exist and displays them"""
 
-    users = Users.query.all()
+    users = User.query.all()
     return render_template('users.html', users=users)
 
 @app.route('/users/<int:user_id>')
 def show_user_data(user_id):
     """Displays all information of the desired user"""
 
-    user = Users.query.get_or_404(user_id)
+    user = User.query.get_or_404(user_id)
     return render_template('user.html', user=user)
 
 @app.route('/users/new')
@@ -48,7 +48,7 @@ def create_user():
     last_name = request.form['last_name']
     image_url = request.form.get('image_url', None)
 
-    new_user = Users(first_name=first_name, last_name=last_name, image_url=image_url)
+    new_user = User(first_name=first_name, last_name=last_name, image_url=image_url)
     db.session.add(new_user)
     db.session.commit()
 
@@ -58,7 +58,7 @@ def create_user():
 def display_edit_form(user_id):
     """Renders the template for the 'edit user' form"""
 
-    user = Users.query.get_or_404(user_id)
+    user = User.query.get_or_404(user_id)
     return render_template('edit.html', user=user)
 
 @app.route('/users/<int:user_id>/edit', methods=["POST"])
@@ -69,7 +69,7 @@ def edit_user(user_id):
     last_name = request.form['last_name']
     image_url = request.form['image_url']
 
-    user = Users.query.get_or_404(user_id)
+    user = User.query.get_or_404(user_id)
     user.first_name = first_name
     user.last_name = last_name
     user.image_url = image_url
@@ -83,7 +83,7 @@ def edit_user(user_id):
 def delete_user(user_id):
     """Deletes the appropriate user"""
 
-    Users.query.filter_by(id=user_id).delete()
+    User.query.filter_by(id=user_id).delete()
     db.session.commit()
 
     return redirect('/users')
