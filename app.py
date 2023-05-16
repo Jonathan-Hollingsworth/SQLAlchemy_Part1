@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'Alchemist'
 
 connect_db(app)
-db.drop_all()
 db.create_all()
 
 @app.route('/')
